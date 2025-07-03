@@ -15,12 +15,12 @@ const MONGODB_URI = process.env.MONGODB_URI;
 
 mongoDb
   .connect(MONGODB_URI)
-  .then(() => console.log("Connected to mongodb"))
+  .then()
   .catch((error) => log("MONGODB_CONNECTION_ERROR: " + error));
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin:process.env.CLIENT_ORIGIN || "http://localhost:5173",
     credentials: true,
   })
 );
@@ -40,10 +40,14 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use((err, req, res, next) => {
+  log("SERVER_ERROR: " + err);
+  res.status(500).json({ message: ["Internal Server Error"] });
+});
 
 app.use("/api/v1/users", userRoute);
 
 app.use("/api/v1/students",verifyToken, studentsRoute);
 app.use("/api/v1/marks", verifyToken, marksRoute);
 
-app.listen(PORT, () => console.log("Server started"));
+app.listen(PORT);
