@@ -146,7 +146,7 @@ async function handleUpdateMarks(req, res) {
 async function handleDeleteMarks(req, res) {
   const id = req.params.marksId;
   try {
-    const deletedMarks = await Marks.deleteMany(id);
+    const deletedMarks = await Marks.findByIdAndDelete(id);
 
     if (!deletedMarks) {
       return res.status(500).json({ message: ["Marks not found"] });
