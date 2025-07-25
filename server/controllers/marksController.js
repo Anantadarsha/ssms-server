@@ -153,7 +153,7 @@ async function handleDeleteMarks(req, res) {
     }
     return res.status(200).json({ message: ["Successfully Deleted"] });
   } catch (error) {
-    log(`handleDeleteMarks: ${error}`);
+        console.error(`Error at deleteMarks: ${error}`)
 
     return res.status(500).json({ message: ["Failed to delete marks"] });
   }
