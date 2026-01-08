@@ -15,8 +15,8 @@ const MONGODB_URI = process.env.MONGODB_URI;
 
 mongoDb
   .connect(MONGODB_URI)
-  .then()
-  .catch((error) => log("MONGODB_CONNECTION_ERROR: " + error));
+  .then(() => console.log("Mongodb connected successfully"))
+  .catch((error) => console.log("MONGODB_CONNECTION_ERROR: " + error));
 
 app.use(
   cors({
