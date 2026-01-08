@@ -45,7 +45,7 @@ async function handleLogin(req, res) {
       .status(200)
       .json({ message: ["Login successful"], token: token });
   } catch (error) {
-    log(`handleLogin: ${error}`);
+    console.log("Error in handle login: ", error);
     return res.status(401).json({ message: ["Failed to login."] });
   }
 }
